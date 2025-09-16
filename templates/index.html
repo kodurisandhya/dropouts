@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Student Dropout Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>Student Dropout Prediction</h1>
+        <p>Fill in the details below to assess the dropout risk and receive counseling suggestions.</p>
+        
+        <form method="POST">
+            <label>Attendance (%):</label>
+            <input type="number" name="attendance" required min="0" max="100"><br>
+
+            <label>Grades (%):</label>
+            <input type="number" name="grades" required min="0" max="100"><br>
+
+            <label>Participation Score (1-10):</label>
+            <input type="number" name="participation" required min="1" max="10"><br>
+
+            <label>Financial Issues:</label>
+            <select name="financial_issue" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select><br>
+
+            <label>Family Support:</label>
+            <select name="family_support" required>
+                <option value="Good">Good</option>
+                <option value="Poor">Poor</option>
+            </select><br>
+
+            <label>Health Issues:</label>
+            <select name="health_issue" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select><br>
+
+            <button type="submit">Predict Risk</button>
+        </form>
+
+        {% if risk %}
+        <div class="result">
+            <h2>Prediction Result</h2>
+            <p><strong>Risk Level:</strong> {{ risk }}</p>
+            <p><strong>Counseling Suggestions:</strong></p>
+            <ul>
+                {% for suggestion in suggestions %}
+                <li>{{ suggestion }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
